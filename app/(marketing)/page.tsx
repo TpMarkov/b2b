@@ -8,7 +8,6 @@ const Home = (props: Props) => {
   return (
     <div>
       <HeroSection />
-      <ModeToggle />
     </div>
   );
 };

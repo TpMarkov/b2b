@@ -11,6 +11,7 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { ModeToggle } from "@/components/theme-provider/ThemeSwitcher";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -110,7 +111,7 @@ export const HeroHeader = () => {
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
                 {!isLoading &&
                   (user ? (
-                    <React.Fragment>
+                    <div className="flex items-center justify-start gap-2">
                       <Link
                         href="/workspace"
                         className={buttonVariants({
@@ -128,39 +129,50 @@ export const HeroHeader = () => {
                       >
                         Log Out
                       </LogoutLink>
-                    </React.Fragment>
+                      <div className="ml-auto">
+                        <ModeToggle />
+                      </div>
+                    </div>
                   ) : (
                     <div className="flex gap-2">
-                      <LoginLink
-                        authUrlParams={{ screen_hint: "login" }}
-                        postLoginRedirectURL="/"
-                        className={buttonVariants({
-                          variant: "outline",
-                          size: "sm",
-                          className: cn(isScrolled && "lg:hidden"),
-                        })}
-                      >
-                        Login
-                      </LoginLink>
-                      <RegisterLink
-                        postLoginRedirectURL="/"
-                        className={buttonVariants({
-                          variant: "default",
-                          size: "sm",
-                          className: cn(isScrolled && "lg:hidden"),
-                        })}
-                      >
-                        Sign Up
-                      </RegisterLink>
-                      <RegisterLink
-                        className={buttonVariants({
-                          variant: "default",
-                          size: "sm",
-                          className: cn(isScrolled ? "" : "lg:hidden"),
-                        })}
-                      >
-                        Get Started
-                      </RegisterLink>
+                      {/* Show Login + Sign Up only when NOT scrolled */}
+                      {!isScrolled && (
+                        <>
+                          <LoginLink
+                            authUrlParams={{ screen_hint: "login" }}
+                            postLoginRedirectURL="/"
+                            className={buttonVariants({
+                              variant: "outline",
+                              size: "sm",
+                            })}
+                          >
+                            Login
+                          </LoginLink>
+
+                          <RegisterLink
+                            postLoginRedirectURL="/"
+                            className={buttonVariants({
+                              variant: "default",
+                              size: "sm",
+                            })}
+                          >
+                            Sign Up
+                          </RegisterLink>
+                        </>
+                      )}
+
+                      {/* Show Get Started only when scrolled */}
+                      {isScrolled && (
+                        <RegisterLink
+                          postLoginRedirectURL="/"
+                          className={buttonVariants({
+                            variant: "default",
+                            size: "sm",
+                          })}
+                        >
+                          Get Started
+                        </RegisterLink>
+                      )}
                     </div>
                   ))}
               </div>
