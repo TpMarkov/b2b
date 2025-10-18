@@ -11,6 +11,7 @@ import {
   LogoutLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { ModeToggle } from "@/components/theme-provider/ThemeSwitcher";
 
 const menuItems = [
   { name: "Features", href: "#link" },
@@ -128,6 +129,9 @@ export const HeroHeader = () => {
                       >
                         Log Out
                       </LogoutLink>
+                      <div className="ml-auto">
+                        <ModeToggle />
+                      </div>
                     </div>
                   ) : (
                     <div className="flex gap-2">
