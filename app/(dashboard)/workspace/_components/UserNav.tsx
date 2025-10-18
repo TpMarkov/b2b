@@ -68,7 +68,7 @@ const UserNav = (props: Props) => {
           <DropdownMenuItem asChild>
             <PortalLink>
               <CreditCardIcon />
-              Biilling
+              Billing
             </PortalLink>
           </DropdownMenuItem>
         </DropdownMenuGroup>

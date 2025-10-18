@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/tooltip";
 import React from "react";
 import { getWorkspaceColor } from "@/lib/helpers";
-import Createworkspace from "./Createworkspace";
 
 type Props = {};
 type workspace = {
