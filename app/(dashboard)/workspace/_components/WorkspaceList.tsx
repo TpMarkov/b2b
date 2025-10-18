@@ -14,8 +14,7 @@ import { orpc } from "@/lib/orpc";
 const WorkspaceList = () => {
   const {
     data: { workspaces, currentWorkspace },
-  } = useSuspenseQuery(orpc.workspace.lsit.queryOptions());
-
+  } = useSuspenseQuery(orpc.workspace.list.queryOptions());
   return (
     <TooltipProvider>
       <div className="flex flex-col gap-2 mt-3">

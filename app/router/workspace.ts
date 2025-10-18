@@ -33,15 +33,14 @@ export const listWorkspaces = base
 
     const organizations = await getUserOrganizations();
 
-    if (!organizations) {
+    if (!organizations || !organizations.orgs) {
       throw errors.FORBIDDEN();
     }
-
     return {
       workspaces: organizations?.orgs.map((org) => ({
         id: org.code,
         name: org.name ?? "My Workspace",
-        avatar: String(org.name?.charAt(0) ?? "M"),
+        avatar: String(org.name?.charAt(0) || "M"),
       })),
       user: context.user,
       currentWorkspace: context.workspace,
