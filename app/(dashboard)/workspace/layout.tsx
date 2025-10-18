@@ -4,6 +4,7 @@ import Createworkspace from "./_components/Createworkspace";
 import UserNav from "./_components/UserNav";
 import { orpc } from "@/lib/orpc";
 import { getQueryClient, HydrateClient } from "@/lib/query/hydration";
+import { HydrationBoundary } from "@tanstack/react-query";
 
 type Props = {
   children: React.ReactNode;

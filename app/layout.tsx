@@ -5,6 +5,7 @@ import "@/lib/orpc.server"; // pre-render for orpc
 import { ThemeProvider } from "@/components/theme-provider/theme-provider";
 import { AuthProvider } from "@/components/auth-provider/AuthProvider";
 import { Providers } from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Providers>{children}</Providers>
+            <Toaster closeButton position="top-center" />
           </ThemeProvider>
         </body>
       </html>

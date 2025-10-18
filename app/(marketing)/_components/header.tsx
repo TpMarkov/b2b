@@ -140,7 +140,7 @@ export const HeroHeader = () => {
                         <>
                           <LoginLink
                             authUrlParams={{ screen_hint: "login" }}
-                            postLoginRedirectURL="/"
+                            postLoginRedirectURL="/workspace"
                             className={buttonVariants({
                               variant: "outline",
                               size: "sm",

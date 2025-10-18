@@ -15,6 +15,7 @@ const WorkspaceList = () => {
   const {
     data: { workspaces, currentWorkspace },
   } = useSuspenseQuery(orpc.workspace.list.queryOptions());
+
   return (
     <TooltipProvider>
       <div className="flex flex-col gap-2 mt-3">
