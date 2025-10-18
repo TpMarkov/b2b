@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -7,70 +8,41 @@ import {
 } from "@/components/ui/tooltip";
 import React from "react";
 import { getWorkspaceColor } from "@/lib/helpers";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
 
-type Props = {};
-type workspace = {
-  id: number;
-  name: string;
-  avatar: string;
-};
-const workspaces = [
-  {
-    id: "1",
-    name: "Team-flow-1",
-    avatar: "FF",
-  },
-  {
-    id: "2",
-    name: "Team-flow-2",
-    avatar: "FF",
-  },
-  {
-    id: "3",
-    name: "Team-flow-3",
-    avatar: "FF",
-  },
-  {
-    id: "4",
-    name: "Team-flow-4",
-    avatar: "FF",
-  },
-  {
-    id: "5",
-    name: "Team-flow-5",
-    avatar: "FF",
-  },
-  {
-    id: "6",
-    name: "Team-flow-6",
-    avatar: "FF",
-  },
-];
-
-const WorkspaceList = (props: Props) => {
+const WorkspaceList = () => {
+  const {
+    data: { workspaces, currentWorkspace },
+  } = useSuspenseQuery(orpc.workspace.list.queryOptions());
   return (
     <TooltipProvider>
-      <div className="flex flex-col gap-2">
-        {workspaces.map((workspace) => (
-          <Tooltip key={workspace.id}>
-            <TooltipTrigger asChild>
-              <Button
-                variant="default"
-                size="icon"
-                className={`size-12 transition-all duration-200 ${getWorkspaceColor(
-                  workspace.id
-                )}`}
-              >
-                <span className="text-sm font-semibold">
-                  {workspace.avatar}
-                </span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{workspace.name}</p>
-            </TooltipContent>
-          </Tooltip>
-        ))}
+      <div className="flex flex-col gap-2 mt-3">
+        {workspaces.map((ws) => {
+          const isActive = currentWorkspace.orgCode === ws.id;
+          return (
+            <Tooltip key={ws.id}>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="default"
+                  size="icon"
+                  className={`size-12 transition-all duration-200 ${getWorkspaceColor(
+                    ws.id
+                  )} ${
+                    isActive ? "rounded-lg" : "rounded-xl hover:rounded-lg"
+                  }`}
+                >
+                  <span className="text-sm font-semibold">{ws.avatar}</span>
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>
+                  {ws.name} {isActive && "Active"}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          );
+        })}
       </div>
     </TooltipProvider>
   );
