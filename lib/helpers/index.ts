@@ -9,3 +9,7 @@ export const getWorkspaceColor = (id: string) => {
 
   return colorCombinations[colorIndex];
 };
+
+export const getAvatar = (userPicture: string | null, userEmail: string) => {
+  return userPicture ?? `https://avatar.vercel.sh/${userEmail}`;
+};

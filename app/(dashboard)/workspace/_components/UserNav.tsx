@@ -1,3 +1,4 @@
+"use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,22 +16,25 @@ import {
   LogoutLink,
   PortalLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
-
-const user = {
-  picture: "/logo.png",
-  given_name: "Tsvetan Markov",
-  email: "tsvetanmarkow@gmail.com",
-};
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
+import { getAvatar } from "@/lib/helpers";
 
 const UserNav = () => {
+  const {
+    data: { user },
+  } = useSuspenseQuery(orpc.workspace.list.queryOptions());
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="rounded-xl size-12 hover:rounded-lg transition-all duration-200 bg-background/50 border-border/50 hover:bg-accent hover:text-accent">
           <Avatar className="w-10 h-10">
-            <AvatarImage src={user.picture} alt="Image" />
+            <AvatarImage
+              src={getAvatar(user.picture, user.email!)}
+              alt="Image"
+            />
             <AvatarFallback>
-              {user.given_name.slice(0, 2).toUpperCase()}
+              {user.given_name?.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>
@@ -43,9 +47,12 @@ const UserNav = () => {
       >
         <DropdownMenuLabel className="font-normal flex items-center gap-2 px-1 py-1.5 text-left text-sm">
           <Avatar className="w-10 h-10 mb-2">
-            <AvatarImage src={user.picture} alt="Image" />
+            <AvatarImage
+              src={getAvatar(user.picture, user.email!)}
+              alt="Image"
+            />
             <AvatarFallback>
-              {user.given_name.slice(0, 2).toUpperCase()}
+              {user.given_name?.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight gap-y-2">
