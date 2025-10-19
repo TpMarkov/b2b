@@ -34,9 +34,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { workspaceSchema } from "@/app/schemas/workspce";
 
-type Props = {};
-
-const Createworkspace = (props: Props) => {
+const Createworkspace = () => {
   const [open, setOpen] = useState(false);
   const form = useForm({
     resolver: zodResolver(workspaceSchema),
@@ -53,7 +51,7 @@ const Createworkspace = (props: Props) => {
     <Dialog open={open} onOpenChange={setOpen}>
       <TooltipProvider>
         <Tooltip>
-          <TooltipTrigger>
+          <TooltipTrigger asChild>
             <DialogTrigger asChild>
               <Button
                 className="size-12 rounded-xl border-2 border-dashed border-muted-foreground/50 text-muted-foreground hover:border-muted-foreground hover:text-foreground transition-all duration-200"

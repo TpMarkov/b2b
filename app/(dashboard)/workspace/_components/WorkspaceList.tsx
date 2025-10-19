@@ -8,18 +8,21 @@ import {
 } from "@/components/ui/tooltip";
 import React from "react";
 import { getWorkspaceColor } from "@/lib/helpers";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { orpc } from "@/lib/orpc";
+import Image from "next/image";
 
 const WorkspaceList = () => {
-  const {
-    data: { workspaces, currentWorkspace },
-  } = useSuspenseQuery(orpc.workspace.list.queryOptions());
+  const workspaces = [
+    {
+      id: "1",
+      name: "First workspace",
+      avatar: "/logo.png",
+    },
+  ];
+  const isActive = true;
   return (
     <TooltipProvider>
       <div className="flex flex-col gap-2 mt-3">
         {workspaces.map((ws) => {
-          const isActive = currentWorkspace.orgCode === ws.id;
           return (
             <Tooltip key={ws.id}>
               <TooltipTrigger asChild>
@@ -32,7 +35,16 @@ const WorkspaceList = () => {
                     isActive ? "rounded-lg" : "rounded-xl hover:rounded-lg"
                   }`}
                 >
-                  <span className="text-sm font-semibold">{ws.avatar}</span>
+                  {ws.avatar ? (
+                    <Image
+                      src={ws.avatar}
+                      width={20}
+                      height={20}
+                      alt="workspace log"
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold">{ws.name[0]}</span>
+                  )}
                 </Button>
               </TooltipTrigger>
               <TooltipContent>

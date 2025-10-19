@@ -16,15 +16,13 @@ import {
   PortalLink,
 } from "@kinde-oss/kinde-auth-nextjs/components";
 
-type Props = {};
-
 const user = {
   picture: "/logo.png",
   given_name: "Tsvetan Markov",
   email: "tsvetanmarkow@gmail.com",
 };
 
-const UserNav = (props: Props) => {
+const UserNav = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
