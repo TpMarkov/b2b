@@ -89,7 +89,7 @@ export const createWorkspace = base
       await Organizations.addOrganizationUsers({
         orgCode: data.organization.code,
         requestBody: {
-          users: [{ id: context.user.id, roles: ["admmin"] }],
+          users: [{ id: context.user.id, roles: ["admin"] }],
         },
       });
     } catch {
