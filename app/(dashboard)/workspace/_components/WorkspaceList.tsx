@@ -23,7 +23,6 @@ const WorkspaceList = () => {
       <div className="flex flex-col gap-2 mt-3">
         {workspaces.map((ws) => {
           const isActive = currentWorkspace.orgCode === ws.id;
-
           return (
             <Tooltip key={ws.id}>
               <TooltipTrigger asChild>

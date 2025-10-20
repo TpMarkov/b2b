@@ -19,6 +19,7 @@ import {
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { getAvatar } from "@/lib/helpers";
+import Image from "next/image";
 
 const UserNav = () => {
   const {
@@ -29,10 +30,16 @@ const UserNav = () => {
       <DropdownMenuTrigger asChild>
         <Button className="rounded-xl size-12 hover:rounded-lg transition-all duration-200 bg-background/50 border-border/50 hover:bg-accent hover:text-accent">
           <Avatar className="w-10 h-10">
-            <AvatarImage
+            <Image
+              src={getAvatar(user.picture, user.email!)}
+              fill
+              className="object=cover"
+              alt="User Image"
+            />
+            {/* <AvatarImage
               src={getAvatar(user.picture, user.email!)}
               alt="Image"
-            />
+            /> */}
             <AvatarFallback>
               {user.given_name?.slice(0, 2).toUpperCase()}
             </AvatarFallback>
