@@ -20,7 +20,7 @@ const buildStandartAc = () =>
       })
     );
 
-export const standardSecurityMiddleware = base
+export const standartWriteSecurityMiddleware = base
   .$context<{
     request: Request;
     user: KindeUser<Record<string, unknown>>;
