@@ -1,11 +1,31 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { EditorContent, useEditor } from "@tiptap/react";
-import { baseExtensions, editorExtensions } from "./extensions";
+import { editorExtensions } from "./extensions";
 import Menubar from "./Menubar";
 
-const RichTextEditor = () => {
+interface iAppProps {
+  field: any;
+  sendButton: React.ReactNode;
+  footerLeft?: React.ReactNode;
+}
+const RichTextEditor = ({ field, sendButton, footerLeft }: iAppProps) => {
   const editor = useEditor({
     immediatelyRender: false,
+    content: (() => {
+      if (!field?.value) return "";
+
+      try {
+        return JSON.parse(field.value);
+      } catch {
+        return "";
+      }
+    })(),
+    onUpdate: ({ editor }) => {
+      if (field?.onChange) {
+        field.onChange(JSON.stringify(editor.getJSON()));
+      }
+    },
     extensions: editorExtensions,
     editorProps: {
       attributes: {
@@ -21,6 +41,10 @@ const RichTextEditor = () => {
         editor={editor}
         className="max-w-[200px] overflow-y-auto"
       />
+      <div className="flex items-center gap-2 justify-between px-3 py-2 border-t border-input bg-card">
+        <div className="min-h-8 flex items-center">{footerLeft}</div>
+        <div className="shrink-0">{sendButton}</div>
+      </div>
     </div>
   );
 };

@@ -1,28 +1,18 @@
+import { Message } from "@/lib/generated/prisma";
 import { getAvatar } from "@/lib/helpers";
 import Image from "next/image";
 import React from "react";
+import SafeContent from "./SafeContent";
 
-type Props = {
-  id: number;
-  message: string;
-  date: Date;
-  avatar: string;
-  userName: string;
-  email?: string;
-};
+interface Props {
+  message: Message;
+}
 
-const MessageItem = ({
-  id,
-  message,
-  date,
-  avatar,
-  userName,
-  email = "markowcvetan@gmail.com",
-}: Props) => {
+const MessageItem = ({ message }: Props) => {
   return (
     <div className="flex space-x-3 relative p-3 rounded-lg hover:bg-muted">
       <Image
-        src={getAvatar(avatar, email)}
+        src={getAvatar(message.authorAvatar, message.authorEmail)}
         width={32}
         height={32}
         // className="object-cover"
@@ -31,23 +21,26 @@ const MessageItem = ({
       />
       <div className="flex-1 space-y-1 min-w-0">
         <div className="flex items-center gap-x-2">
-          <p className="font-medium leading-none">{userName}</p>
+          <p className="font-medium leading-none">{message.authorName}</p>
           <p className="text-xs text-muted-foreground leading-none">
             {new Intl.DateTimeFormat("en-GB", {
               day: "numeric",
               month: "short",
               year: "numeric",
-            }).format(date)}
+            }).format(message.createdAt)}
           </p>
           <p className="text-xs text-muted-foreground">
             {new Intl.DateTimeFormat("en-GB", {
               hour12: false,
               hour: "2-digit",
               minute: "2-digit",
-            }).format(date)}
+            }).format(message.createdAt)}
           </p>
         </div>
-        <p className="break-words text-sm max-w-none">{message}</p>
+        <SafeContent
+          className="text-sm break-words prose dark:prose-invert max-w-none marker:text-primary"
+          content={JSON.parse(message.content)}
+        />
       </div>
     </div>
   );

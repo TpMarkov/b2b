@@ -3,6 +3,18 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.ProseMirror ul {
+  list-style-type: disc;
+  list-style-position: inside;
+  margin-left: 1.5rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+  margin-left: 1.5rem;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -70,7 +82,7 @@ body {
 
 
 
-:root {
+/* :root {
   --background: oklch(0.9900 0 0);
   --foreground: oklch(0 0 0);
   --card: oklch(1 0 0);
@@ -229,4 +241,187 @@ body {
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+} */
+ul,
+ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Mongo Theme */
+:root {
+  /* Light Mode */
+  --background: oklch(0.985 0.002 95);
+  --foreground: oklch(0.13 0.015 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.13 0.015 250);
+  --popover: oklch(0.985 0.002 95);
+  --popover-foreground: oklch(0.13 0.015 250);
+
+  --primary: #13c29a;
+  --primary-foreground: #0f1c2e;
+  --secondary: oklch(0.94 0.01 250);
+  --secondary-foreground: oklch(0.15 0.02 250);
+
+  --muted: oklch(0.95 0.01 250);
+  --muted-foreground: oklch(0.45 0.015 250);
+  --accent: #13c29a;
+  --accent-foreground: #0f1c2e;
+
+  --destructive: oklch(0.63 0.19 23);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.94 0 0);
+  --ring: #13c29a;
+
+  /* Charts (soft colors) */
+  --chart-1: #13c29a;
+  --chart-2: #4fb3ff;
+  --chart-3: #e0e6f1;
+  --chart-4: #597b8f;
+  --chart-5: #ffd580;
+
+  /* Sidebar / UI */
+  --sidebar: oklch(0.99 0 0);
+  --sidebar-foreground: oklch(0.15 0.02 250);
+  --sidebar-primary: #13c29a;
+  --sidebar-primary-foreground: #0f1c2e;
+  --sidebar-accent: oklch(0.94 0.01 250);
+  --sidebar-accent-foreground: oklch(0.15 0.02 250);
+  --sidebar-border: oklch(0.92 0 0);
+  --sidebar-ring: #13c29a;
+
+  /* Typography & Layout */
+  --font-sans: "Fira Code", Geist, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Geist Mono, monospace;
+  --radius: 0.5rem;
+
+  /* Shadows */
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0 4px 8px hsl(0 0% 0% / 0.15);
+  --shadow-lg: 0 8px 16px hsl(0 0% 0% / 0.2);
+  --shadow-xl: 0 12px 24px hsl(0 0% 0% / 0.25);
+
+  --spacing: 0.25rem;
+  --tracking-normal: 0em;
+}
+
+/* 🌑 Dark Mode (MongoDB-Inspired) */
+.dark {
+  --background: #0f1c2e;
+  --foreground: #e0e6f1;
+
+  --card: #13263b;
+  --card-foreground: #e0e6f1;
+  --popover: #102331;
+  --popover-foreground: #e0e6f1;
+
+  --primary: #13c29a;
+  --primary-foreground: #0f1c2e;
+  --secondary: #102b3c;
+  --secondary-foreground: #e0e6f1;
+
+  --muted: #112b3c;
+  --muted-foreground: #597b8f;
+  --accent: #13c29a;
+  --accent-foreground: #0f1c2e;
+
+  --destructive: #e74c3c;
+  --destructive-foreground: #0f1c2e;
+
+  --border: #112b3c;
+  --input: #13263b;
+  --ring: #13c29a;
+
+  /* Charts */
+  --chart-1: #13c29a;
+  --chart-2: #4fb3ff;
+  --chart-3: #e0e6f1;
+  --chart-4: #597b8f;
+  --chart-5: #ffd580;
+
+  /* Sidebar */
+  --sidebar: #102331;
+  --sidebar-foreground: #d6e2f0;
+  --sidebar-primary: #13c29a;
+  --sidebar-primary-foreground: #0f1c2e;
+  --sidebar-accent: #13c29a33;
+  --sidebar-accent-foreground: #e0e6f1;
+  --sidebar-border: #112b3c;
+  --sidebar-ring: #13c29a;
+
+  /* Fonts */
+  --font-sans: "Fira Code", Geist, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Geist Mono, monospace;
+
+  /* Shadows */
+  --shadow-color: hsl(0 0% 0%);
+  --shadow-sm: 0 1px 2px hsl(0 0% 0% / 0.25);
+  --shadow-md: 0 2px 6px hsl(0 0% 0% / 0.35);
+  --shadow-lg: 0 4px 12px hsl(0 0% 0% / 0.4);
+  --shadow-xl: 0 8px 20px hsl(0 0% 0% / 0.5);
+}
+
+/* Map for Tailwind @theme */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Font sizes */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Shadows */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* Spacing & Tracking */
+  --spacing: var(--spacing);
+  --tracking-normal: var(--tracking-normal);
 }

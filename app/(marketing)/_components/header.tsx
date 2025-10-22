@@ -141,7 +141,6 @@ export const HeroHeader = () => {
                         <>
                           <LoginLink
                             authUrlParams={{ screen_hint: "login" }}
-                            postLoginRedirectURL="/"
                             className={buttonVariants({
                               variant: "outline",
                               size: "sm",

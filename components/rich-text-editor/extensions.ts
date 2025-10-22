@@ -3,11 +3,12 @@ import TextAlign from "@tiptap/extension-text-align";
 import { all, createLowlight } from "lowlight";
 import { Placeholder } from "@tiptap/extensions";
 import CodeBlock from "@tiptap/extension-code-block-lowlight";
-
 const lowlight = createLowlight(all);
 
 export const baseExtensions = [
-  StarterKt.configure({ codeBlock: false }),
+  StarterKt.configure({
+    codeBlock: false,
+  }),
   TextAlign.configure({
     types: ["heading", "paragraph"],
   }),

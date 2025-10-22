@@ -10,6 +10,7 @@ export const requiredWorkspaceMiddleware = base
     if (!workspace) {
       throw errors.FORBIDDEN();
     }
+
     return next({
       context: {
         workspace,

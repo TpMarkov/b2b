@@ -31,10 +31,12 @@ import { Input } from "@/components/ui/input";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { toast } from "sonner";
+import { useParams, useRouter } from "next/navigation";
 
 const CreateNewChannel = () => {
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
+  const { workspaceId } = useParams();
 
   const form = useForm({
     resolver: zodResolver(channelNameSchema),
@@ -43,6 +45,7 @@ const CreateNewChannel = () => {
 
   const watchedName = form.watch("name");
   const transformedName = watchedName ? transformChannelName(watchedName) : "";
+  const router = useRouter();
 
   const createChannelMutation = useMutation(
     orpc.channel.create.mutationOptions({
@@ -53,6 +56,7 @@ const CreateNewChannel = () => {
           queryKey: orpc.channel.list.queryKey(),
         });
         setOpen(false);
+        router.push(`/workspace/${workspaceId}/channel/${newChannel.id}/`);
         form.reset();
       },
       onError: () => {
@@ -68,7 +72,10 @@ const CreateNewChannel = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="w-full">
+        <Button
+          variant="outline"
+          className="w-full hover:text-muted-foreground"
+        >
           <PlusIcon className="size-4" />
           Add Channel
         </Button>

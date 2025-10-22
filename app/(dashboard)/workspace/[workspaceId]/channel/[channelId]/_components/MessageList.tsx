@@ -1,28 +1,24 @@
+"use client";
 import React from "react";
 import MessageItem from "./message/MessageItem";
+import { useQuery } from "@tanstack/react-query";
+import { orpc } from "@/lib/orpc";
+import { useParams } from "next/navigation";
 
 const MessageList = () => {
-  const messages = [
-    {
-      id: 1,
-      message: "Hello how are you my friend",
-      date: new Date(),
-      avatar: "https://avatars.githubusercontent.com/u/195268847?v=4",
-      username: "Tsvetan Markov",
-    },
-  ];
+  const { channelId } = useParams<{ channelId: string }>();
+
+  const { data } = useQuery(
+    orpc.message.list.queryOptions({
+      input: { channelId },
+    })
+  );
+
   return (
     <div className="relative h-full">
       <div className="h-full overflow-y-auto px-4">
-        {messages.map((m) => (
-          <MessageItem
-            key={m.id}
-            id={m.id}
-            date={m.date}
-            userName={m.username}
-            avatar={m.avatar}
-            message={m.message}
-          />
+        {data?.map((message) => (
+          <MessageItem key={message.id} message={message} />
         ))}
       </div>
     </div>
