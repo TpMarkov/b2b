@@ -39,6 +39,7 @@ const RichTextEditor = ({ field, sendButton, footerLeft }: iAppProps) => {
       <Menubar editor={editor} />
       <EditorContent
         editor={editor}
+        // change this to add more width to sending message input field
         className="max-w-[200px] overflow-y-auto"
       />
       <div className="flex items-center gap-2 justify-between px-3 py-2 border-t border-input bg-card">
