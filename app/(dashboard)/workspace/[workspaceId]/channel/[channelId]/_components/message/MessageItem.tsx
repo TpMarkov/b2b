@@ -38,7 +38,7 @@ const MessageItem = ({ message }: Props) => {
           </p>
         </div>
         <SafeContent
-          className="text-sm break-words prose dark:prose-invert max-w-none marker:text-primary"
+          className="prose list-disc list-outside [&_ul]:ml-6 [&_ol]:ml-6"
           content={JSON.parse(message.content)}
         />
       </div>

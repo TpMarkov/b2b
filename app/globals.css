@@ -3,16 +3,37 @@
 
 @custom-variant dark (&:is(.dark *));
 
+
+.prose ul,
+.prose ol {
+  list-style-type: revert;
+  list-style-position: outside;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+/* Optional: ensure list markers use your theme color */
+.prose li::marker {
+  color: hsl(var(--primary));
+}
+
 .ProseMirror ul {
   list-style-type: disc;
-  list-style-position: inside;
+  list-style-position: outside;
   margin-left: 1.5rem;
+  padding-left: 1rem;
 }
 
 .ProseMirror ol {
   list-style-type: decimal;
-  list-style-position: inside;
+  list-style-position: outside;
   margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.ProseMirror li::marker {
+  color: hsl(var(--primary));
+  /* optional, matches your theme */
 }
 
 @theme inline {
