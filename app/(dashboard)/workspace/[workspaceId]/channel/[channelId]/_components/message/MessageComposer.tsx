@@ -1,13 +1,16 @@
-import { CreateMessageSchemaType } from "@/app/schemas/message";
+"use client";
+import { UseAttachmentUploadType } from "@/app/hooks/use-attachment-upload";
 import RichTextEditor from "@/components/rich-text-editor/Editor";
+import ImageUploadModal from "@/components/rich-text-editor/ImageUploadModal";
 import { Button } from "@/components/ui/button";
 import { ImageIcon, SendIcon } from "lucide-react";
-import React from "react";
+
 interface iAppProps {
   value: string;
   onChange: (next: string) => void;
   onSubmit: () => void;
   isSubmiting?: boolean;
+  upload: UseAttachmentUploadType;
 }
 
 const MessageComposer = ({
@@ -15,6 +18,7 @@ const MessageComposer = ({
   onChange,
   onSubmit,
   isSubmiting,
+  upload,
 }: iAppProps) => {
   return (
     <>
@@ -33,11 +37,21 @@ const MessageComposer = ({
           </Button>
         }
         footerLeft={
-          <Button type="button" size="sm" variant={"outline"}>
+          <Button
+            type="button"
+            size="sm"
+            variant={"outline"}
+            onClick={() => upload.setIsOpen(true)}
+          >
             <ImageIcon className="size-4 mr-1" />
             Attach
           </Button>
         }
+      />
+      <ImageUploadModal
+        open={upload.isOpen}
+        onOpenChange={upload.setIsOpen}
+        onUploaded={(url) => upload.onUploaded(url)}
       />
     </>
   );

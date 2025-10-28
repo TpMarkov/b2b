@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const MessageList = () => {
   const { channelId } = useParams<{ channelId: string }>();
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const bottomRef = useRef<HTMLDialogElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
   const [isAtBotom, setIsAtBottom] = useState(false);
   const [newMessages, setNewMessages] = useState(false);
   const lastItemIdRef = useRef<string | undefined>(undefined);
