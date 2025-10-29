@@ -41,6 +41,18 @@ const MessageItem = ({ message }: Props) => {
           className="prose list-disc list-outside [&_ul]:ml-6 [&_ol]:ml-6"
           content={JSON.parse(message.content)}
         />
+
+        {message.imageUrl && (
+          <div className="mt-3">
+            <Image
+              width={512}
+              height={512}
+              src={message.imageUrl}
+              alt="Message Image"
+              className="rounded-md max-h-[320px] w-auto object-contain"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

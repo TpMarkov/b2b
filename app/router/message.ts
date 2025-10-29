@@ -38,7 +38,7 @@ export const createMessage = base
     const created = await prisma.message.create({
       data: {
         channelId: input.channelId,
-        content: input.content,
+        content: JSON.stringify(input.content),
         imageUrl: input.imageUrl,
         authorId: context.user.id,
         authorEmail: context.user.email!,

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const MessageList = () => {
   const { channelId } = useParams<{ channelId: string }>();
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const bottomRef = useRef<HTMLDialogElement | null>(null);
+  const bottomRef = useRef<HTMLDivElement | null>(null);
   const [isAtBotom, setIsAtBottom] = useState(false);
   const [newMessages, setNewMessages] = useState(false);
   const lastItemIdRef = useRef<string | undefined>(undefined);
@@ -124,7 +124,7 @@ const MessageList = () => {
   return (
     <div className="relative h-full">
       <div
-        className="h-full overflow-y-auto px-4 "
+        className="h-full overflow-y-auto px-4 flex flex-col space-y-1"
         ref={scrollRef}
         onScroll={handleScroll}
       >
