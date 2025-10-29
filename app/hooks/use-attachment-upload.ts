@@ -13,6 +13,11 @@ export function useAttachmentUpload() {
     setIsOpen(false);
   }, []);
 
+  const clear = useCallback(() => {
+    setStagedUrl(null);
+    setIsUploading(false);
+  }, []);
+
   return useMemo(
     () => ({
       isOpen,
@@ -20,8 +25,9 @@ export function useAttachmentUpload() {
       onUploaded,
       isUploding,
       stagedUrl,
+      clear,
     }),
-    [isOpen, setIsOpen, onUploaded, isUploding, stagedUrl]
+    [isOpen, setIsOpen, onUploaded, isUploding, stagedUrl, clear]
   );
 }
 

@@ -4,6 +4,7 @@ import RichTextEditor from "@/components/rich-text-editor/Editor";
 import ImageUploadModal from "@/components/rich-text-editor/ImageUploadModal";
 import { Button } from "@/components/ui/button";
 import { ImageIcon, SendIcon } from "lucide-react";
+import AttachmentChip from "./AttachmentChip";
 
 interface iAppProps {
   value: string;
@@ -37,15 +38,19 @@ const MessageComposer = ({
           </Button>
         }
         footerLeft={
-          <Button
-            type="button"
-            size="sm"
-            variant={"outline"}
-            onClick={() => upload.setIsOpen(true)}
-          >
-            <ImageIcon className="size-4 mr-1" />
-            Attach
-          </Button>
+          upload.stagedUrl ? (
+            <AttachmentChip url={upload.stagedUrl} onRemove={upload.clear} />
+          ) : (
+            <Button
+              type="button"
+              size="sm"
+              variant={"outline"}
+              onClick={() => upload.setIsOpen(true)}
+            >
+              <ImageIcon className="size-4 mr-1" />
+              Attach
+            </Button>
+          )
         }
       />
       <ImageUploadModal
