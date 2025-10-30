@@ -13,7 +13,6 @@ const MessageList = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const [isAtBotom, setIsAtBottom] = useState(false);
-  const [newMessages, setNewMessages] = useState(false);
   const lastItemIdRef = useRef<string | undefined>(undefined);
 
   const [hasInitialScroll, setHasInitialScroll] = useState(false);
@@ -70,11 +69,7 @@ const MessageList = () => {
         requestAnimationFrame(() => {
           el.scrollTop = el.scrollHeight;
         });
-
-        setNewMessages(false);
         setIsAtBottom(true);
-      } else {
-        setNewMessages(true);
       }
     }
     lastItemIdRef.current = lastId;
@@ -173,7 +168,6 @@ const MessageList = () => {
 
     bottomRef.current?.scrollIntoView({ block: "end" });
 
-    setNewMessages(false);
     setIsAtBottom(true);
   };
 

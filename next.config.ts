@@ -36,6 +36,7 @@ const nextConfig: NextConfig = {
         hostname: "www.gravatar.com",
       },
       { protocol: "https", hostname: "j8epq36cpv.ufs.sh" },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
     ],
   },
 };
