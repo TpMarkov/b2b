@@ -28,7 +28,7 @@ const ChannelList = () => {
             key={ch.id}
             href={`/workspace/${workspaceId}/channel/${ch.id}`}
             className={buttonVariants({
-              variant: isActive ? "secondary" : "ghost", // different variant when active
+              variant: isActive ? "secondary" : "ghost",
               className: cn(
                 "w-full justify-start px-2 py-1 h-7 text-muted-foreground hover:text-accent-foreground hover:bg-accent",
                 isActive &&
