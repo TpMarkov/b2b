@@ -55,7 +55,11 @@ const MessageItem = ({ message, currentUserId }: Props) => {
           <>
             <SafeContent
               className="prose list-disc list-outside [&_ul]:ml-6 [&_ol]:ml-6"
-              content={JSON.parse(message.content)}
+              content={
+                message.content && message.content !== ""
+                  ? JSON.parse(message.content)
+                  : { type: "doc", content: [] } // empty TipTap doc
+              }
             />
 
             {message.imageUrl && (
