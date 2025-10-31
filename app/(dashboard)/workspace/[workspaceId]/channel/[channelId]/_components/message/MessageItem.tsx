@@ -1,21 +1,27 @@
 import { Message } from "@/lib/generated/prisma";
 import { getAvatar } from "@/lib/helpers";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import SafeContent from "./SafeContent";
+import MessageHoverToolbar from "../toolbar/MessageHoverToolbar";
+import EditMessage from "../toolbar/EditMessage";
 
 interface Props {
   message: Message;
+  currentUserId: string;
 }
 
-const MessageItem = ({ message }: Props) => {
+const MessageItem = ({ message, currentUserId }: Props) => {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
-    <div className="flex space-x-3 relative p-3 rounded-lg hover:bg-muted">
+    <div className="flex space-x-3 relative p-3 rounded-lg hover:bg-muted group">
+      {" "}
+      {/* Add 'group' here */}
       <Image
         src={getAvatar(message.authorAvatar, message.authorEmail)}
         width={32}
         height={32}
-        // className="object-cover"
         alt="User avatar"
         className="size-8 rounded-lg"
       />
@@ -37,23 +43,40 @@ const MessageItem = ({ message }: Props) => {
             }).format(message.createdAt)}
           </p>
         </div>
-        <SafeContent
-          className="prose list-disc list-outside [&_ul]:ml-6 [&_ol]:ml-6"
-          content={JSON.parse(message.content)}
-        />
-
-        {message.imageUrl && (
-          <div className="mt-3">
-            <Image
-              width={512}
-              height={512}
-              src={message.imageUrl}
-              alt="Message Image"
-              className="rounded-md max-h-[320px] w-auto object-contain"
+        {isEditing ? (
+          <EditMessage
+            message={message}
+            onCancel={() => setIsEditing(false)}
+            onSave={() => {
+              setIsEditing(false);
+            }}
+          />
+        ) : (
+          <>
+            <SafeContent
+              className="prose list-disc list-outside [&_ul]:ml-6 [&_ol]:ml-6"
+              content={JSON.parse(message.content)}
             />
-          </div>
+
+            {message.imageUrl && (
+              <div className="mt-3">
+                <Image
+                  width={512}
+                  height={512}
+                  src={message.imageUrl}
+                  alt="Message Image"
+                  className="rounded-md max-h-[320px] w-auto object-contain"
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
+      <MessageHoverToolbar
+        messageId={message.id}
+        canEdit={message.authorId === currentUserId}
+        onEdit={() => setIsEditing(true)}
+      />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import MessageItem from "./message/MessageItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useSuspenseQuery } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,10 @@ const MessageList = () => {
   const lastItemIdRef = useRef<string | undefined>(undefined);
 
   const [hasInitialScroll, setHasInitialScroll] = useState(false);
+  const {
+    data: { user },
+  } = useSuspenseQuery(orpc.workspace.list.queryOptions());
+
   const infiniteOptions = orpc.message.list.infiniteOptions({
     input: (pageParam: string | undefined) => ({
       channelId: channelId,
@@ -189,7 +193,11 @@ const MessageList = () => {
           </div>
         ) : (
           items?.map((message) => (
-            <MessageItem key={message.id} message={message} />
+            <MessageItem
+              key={message.id}
+              message={message}
+              currentUserId={user.id}
+            />
           ))
         )}
         <div ref={bottomRef}></div>

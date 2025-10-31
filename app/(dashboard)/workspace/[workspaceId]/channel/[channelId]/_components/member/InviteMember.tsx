@@ -30,6 +30,7 @@ import { toast } from "sonner";
 
 const InviteMember = () => {
   const [open, setOpen] = useState(false);
+
   const form = useForm({
     resolver: zodResolver(inviteMemberSchema),
     defaultValues: {
@@ -97,7 +98,9 @@ const InviteMember = () => {
                 </FormItem>
               )}
             ></FormField>
-            <Button>Send Invintation</Button>
+            <Button type="submit" disabled={inviteMutation.isPending}>
+              {inviteMutation.isPending ? "Sending..." : "Send Invitation"}
+            </Button>
           </form>
         </Form>
       </DialogContent>
