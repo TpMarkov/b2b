@@ -99,7 +99,7 @@ const Createworkspace = () => {
             <p>Create Workspace</p>
           </TooltipContent>
         </Tooltip>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] dark:backdrop-blur-sm dark:bg-black/40">
           <DialogHeader>
             <DialogTitle>Create Workspace</DialogTitle>
             <DialogDescription>

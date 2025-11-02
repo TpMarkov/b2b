@@ -47,7 +47,7 @@ const MembersOverview = () => {
         </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="p-0 w-[300px]">
-        <div className="p-0">
+        <div className="p-0 ">
           {/* Header */}
           <div className="px-4 py-3 border-b">
             <h3 className="font-semibold text-sm">Workspace Members</h3>

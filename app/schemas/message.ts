@@ -1,3 +1,4 @@
+import { Message } from "react-hook-form";
 import z from "zod";
 
 export const createMessageSchema = z.object({

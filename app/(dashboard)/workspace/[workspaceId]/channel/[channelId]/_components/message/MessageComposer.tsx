@@ -46,6 +46,7 @@ const MessageComposer = ({
               size="sm"
               variant={"outline"}
               onClick={() => upload.setIsOpen(true)}
+              disabled={isSubmiting}
             >
               <ImageIcon className="size-4 mr-1" />
               Attach
