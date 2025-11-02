@@ -1,5 +1,4 @@
 import { Message } from "@/lib/generated/prisma";
-import { extractTextFromJson } from "@/lib/helpers/json-to-text";
 import Image from "next/image";
 import React from "react";
 import SafeContent from "../message/SafeContent";

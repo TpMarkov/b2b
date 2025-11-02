@@ -80,7 +80,7 @@ const CreateNewChannel = () => {
           Add Channel
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] dark:backdrop-blur-sm dark:bg-black/40">
         <DialogHeader>
           <DialogTitle>Create New Channel</DialogTitle>
           <DialogDescription>

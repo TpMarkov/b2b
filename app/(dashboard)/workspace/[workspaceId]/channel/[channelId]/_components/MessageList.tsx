@@ -215,7 +215,7 @@ const MessageList = () => {
         <Button
           onClick={scrollToBottom}
           type="button"
-          className="absolute bottom-0 right-5 z-20 size-10 rounded-full hover:shadow-xl transition-all duration-200"
+          className="absolute bottom-0 m-2 right-5 z-20 size-10 rounded-full hover:shadow-xl transition-all duration-200"
           size="sm"
         >
           <ChevronDownIcon className="size-4" />

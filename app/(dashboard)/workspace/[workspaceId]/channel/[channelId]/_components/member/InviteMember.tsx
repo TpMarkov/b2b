@@ -63,7 +63,7 @@ const InviteMember = () => {
           Invite Member
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] dark:backdrop-blur-sm dark:bg-black/40">
         <DialogHeader>
           <DialogTitle>Invite Member</DialogTitle>
           <DialogDescription>
