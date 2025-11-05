@@ -6,7 +6,6 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { orpc } from "@/lib/orpc";
-import { toast } from "sonner";
 import { GroupedReactionsType } from "@/app/schemas/message";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
