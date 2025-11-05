@@ -4,6 +4,7 @@ import {
   createMessage,
   listMessages,
   listThreadReplies,
+  toggleReaction,
   updateMessage,
 } from "./message";
 import { createWorkspace, listWorkspaces } from "./workspace";
@@ -27,8 +28,14 @@ export const router = {
     create: createMessage,
     list: listMessages,
     update: updateMessage,
+    reaction: {
+      toggleReaction,
+    },
     thread: {
       list: listThreadReplies,
     },
+  },
+  reaction: {
+    toggle: toggleReaction,
   },
 };
