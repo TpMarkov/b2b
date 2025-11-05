@@ -2,6 +2,9 @@ import { Message } from "@/lib/generated/prisma";
 import Image from "next/image";
 import React from "react";
 import SafeContent from "../message/SafeContent";
+import Reactionsbar from "../reactions/Reactionsbar";
+import { threadId } from "worker_threads";
+import { MessageListItem } from "@/lib/types";
 
 function parseMessageContent(content: string | null | undefined) {
   if (!content || content === "") return { type: "doc", content: [] };
@@ -14,10 +17,11 @@ function parseMessageContent(content: string | null | undefined) {
 }
 
 interface ThreadReplyProps {
-  message: Message;
+  message: MessageListItem;
+  selectedThreadId: string;
 }
 
-const ThreadReply = ({ message }: ThreadReplyProps) => {
+const ThreadReply = ({ message, selectedThreadId }: ThreadReplyProps) => {
   // const replyText = extractTextFromJson(message.content);
 
   return (
@@ -58,6 +62,11 @@ const ThreadReply = ({ message }: ThreadReplyProps) => {
             />
           </div>
         )}
+        <Reactionsbar
+          context={{ type: "thread", threadId: selectedThreadId }}
+          reactions={message.reactions}
+          messageId={message.id}
+        />
       </div>
     </div>
   );

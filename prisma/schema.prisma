@@ -52,4 +52,26 @@ model Message {
   threadId      String?
 
   replies Message[] @relation("MessageThread")
+
+  MessageReaction MessageReaction[]
+}
+
+model MessageReaction {
+  id String @id @default(uuid())
+
+  emoji String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  //user
+  userId     String
+  userEmail  String
+  userAvatar String
+  userName   String
+
+  Message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  messageId String
+
+  @@unique([messageId, userId, emoji])
 }

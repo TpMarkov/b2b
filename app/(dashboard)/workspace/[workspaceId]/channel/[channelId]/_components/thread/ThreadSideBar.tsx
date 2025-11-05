@@ -207,7 +207,11 @@ const ThreadSideBar = ({ user }: ThreadSidebarProps) => {
                 </p>
                 <div className="space-y-1">
                   {data.messages.map((reply) => (
-                    <ThreadReply key={reply.id} message={reply} />
+                    <ThreadReply
+                      key={reply.id}
+                      message={reply}
+                      selectedThreadId={selectedThreadId!}
+                    />
                   ))}
                 </div>
               </div>
@@ -221,7 +225,7 @@ const ThreadSideBar = ({ user }: ThreadSidebarProps) => {
           <Button
             onClick={scrollToBottom}
             type="button"
-            className="absolute bottom-0 m-2 right-5 z-20 size-10 rounded-full hover:shadow-xl transition-all duration-200"
+            className="absolute bottom-0 m-4 right-5 z-20 size-10 rounded-full hover:shadow-xl transition-all duration-200"
             size="sm"
           >
             <ChevronDownIcon className="size-4" />
