@@ -1,9 +1,7 @@
-import { Message } from "@/lib/generated/prisma";
 import Image from "next/image";
 import React from "react";
 import SafeContent from "../message/SafeContent";
 import Reactionsbar from "../reactions/Reactionsbar";
-import { threadId } from "worker_threads";
 import { MessageListItem } from "@/lib/types";
 
 function parseMessageContent(content: string | null | undefined) {

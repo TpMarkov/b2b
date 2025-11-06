@@ -16,8 +16,6 @@ import { getAvatar } from "@/lib/helpers";
 import { Message } from "@/lib/generated/prisma";
 import { readSecurityMiddleware } from "../middlewares/arcjet/read";
 import { MessageListItem } from "@/lib/types";
-import { m } from "motion/react";
-import { threadId } from "worker_threads";
 
 function groupReactions(
   reactions: { emoji: string; userId: string }[],
