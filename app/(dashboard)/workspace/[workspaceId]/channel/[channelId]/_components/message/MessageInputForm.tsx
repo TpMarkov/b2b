@@ -78,7 +78,7 @@ const MessgeInputForm = ({ channelId, user }: iAppProps) => {
           channelId: channelId,
           threadId: null,
           replyCount: 0,
-          reactions: [], // ✅ Fix crash
+          reactions: [],
         };
 
         queryClient.setQueryData<InfiniteMessages>(
