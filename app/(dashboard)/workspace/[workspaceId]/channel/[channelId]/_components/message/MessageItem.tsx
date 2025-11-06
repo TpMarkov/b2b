@@ -103,7 +103,7 @@ const MessageItem = ({ message, currentUserId }: Props) => {
               context={{ type: "list", channelId: message.channelId! }}
             />
 
-            {message.repliesCount > 0 && (
+            {message.replyCount > 0 && (
               <button
                 onMouseEnter={prefetchThread}
                 onFocus={prefetchThread}
@@ -113,8 +113,8 @@ const MessageItem = ({ message, currentUserId }: Props) => {
               >
                 <MessageSquareIcon className="size-4" />
                 <span>
-                  {message.repliesCount}{" "}
-                  {message.repliesCount === 1 ? "reply" : "replies"}
+                  {message.replyCount}{" "}
+                  {message.replyCount === 1 ? "reply" : "replies"}
                 </span>
                 <span className="opacity-0 group-hover:opacity-100 transition-opacity">
                   View Thread

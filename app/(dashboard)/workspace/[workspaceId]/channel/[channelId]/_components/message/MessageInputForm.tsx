@@ -25,6 +25,7 @@ import { useAttachmentUpload } from "@/app/hooks/use-attachment-upload";
 import { Message } from "@/lib/generated/prisma";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import { getAvatar } from "@/lib/helpers";
+import { MessageListItem } from "@/lib/types";
 
 interface iAppProps {
   channelId: string;
@@ -64,7 +65,7 @@ const MessgeInputForm = ({ channelId, user }: iAppProps) => {
         ]);
         const tempId = `optimistic-${crypto.randomUUID()}`;
 
-        const optimisticMessage: Message = {
+        const optimisticMessage: MessageListItem = {
           id: tempId,
           content: data.content,
           imageUrl: data.imageUrl ?? null,
@@ -75,6 +76,9 @@ const MessgeInputForm = ({ channelId, user }: iAppProps) => {
           authorName: user.given_name ?? "John Doe",
           authorAvatar: getAvatar(user.picture, user.email!),
           channelId: channelId,
+          threadId: null,
+          replyCount: 0,
+          reactions: [], // ✅ Fix crash
         };
 
         queryClient.setQueryData<InfiniteMessages>(

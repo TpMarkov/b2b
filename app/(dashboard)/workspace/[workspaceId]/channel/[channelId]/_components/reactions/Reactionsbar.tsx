@@ -35,7 +35,11 @@ type MessagePage = {
 
 type InfiniteReplies = InfiniteData<MessagePage>;
 
-const Reactionsbar = ({ messageId, reactions, context }: ReactionsBarProps) => {
+const Reactionsbar = ({
+  messageId,
+  reactions = [],
+  context,
+}: ReactionsBarProps) => {
   const { channelId } = useParams<{ channelId: string }>();
   const queryClient = useQueryClient();
 
@@ -136,6 +140,9 @@ const Reactionsbar = ({ messageId, reactions, context }: ReactionsBarProps) => {
       },
       onSuccess: () => {},
       onError: (_err, _vars, ctx) => {
+        if (ctx?.threadQueryKey && ctx?.previousThread) {
+          queryClient.setQueryData(ctx.threadQueryKey, ctx?.previousThread);
+        }
         if (ctx?.previous && ctx.listKey) {
           queryClient.setQueryData(ctx.listKey, ctx.previous);
         }

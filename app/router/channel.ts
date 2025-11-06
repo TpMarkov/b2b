@@ -13,7 +13,6 @@ import {
   Organizations,
 } from "@kinde/management-api-js";
 import { KindeOrganization, KindeUser } from "@kinde-oss/kinde-auth-nextjs";
-import { errorToJSON } from "next/dist/server/render";
 
 export const createChannel = base
   .use(requiredAuthMiddleware)

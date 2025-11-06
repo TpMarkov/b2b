@@ -11,6 +11,7 @@ import { orpc } from "@/lib/orpc";
 import SafeContent from "../message/SafeContent";
 import { KindeUser } from "@kinde-oss/kinde-auth-nextjs";
 import ThreadSidebarSkeleton from "./ThreadSidebarSkeleton";
+import SummarizeThread from "./SummarizeThread";
 
 interface ThreadSidebarProps {
   user: KindeUser<Record<string, unknown>>;
@@ -140,6 +141,7 @@ const ThreadSideBar = ({ user }: ThreadSidebarProps) => {
         </div>
 
         <div className="flex items-center gap-2">
+          <SummarizeThread messageId={selectedThreadId!} />
           <Button variant="outline" onClick={closeThread}>
             <XIcon className="size-4" />
           </Button>
