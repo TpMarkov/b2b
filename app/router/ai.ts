@@ -11,6 +11,7 @@ import { tipTapJsonToMarkdown } from "@/lib/json-to-markdown";
 import { streamText } from "ai";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider";
 import { streamToEventIterator } from "@orpc/client";
+import { aiSecurityMiddleware } from "../middlewares/arcjet/ai";
 
 const openrouter = createOpenRouter({
   apiKey: process.env.LLM_KEY,
@@ -22,6 +23,7 @@ const model = openrouter.chat(MODEL_ID);
 export const generateThreadSummary = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
+  .use(aiSecurityMiddleware)
   .route({
     method: "GET",
     path: "/ai/thread/summary",
@@ -108,6 +110,7 @@ export const generateThreadSummary = base
       "You are an expert asisstant summarizing Slack-like discussion threads for a product team.",
       "Use only the provided thread content; do not invent facts, names, or timelines.",
       "Output format (Markdown):",
+      "-Use only English language.",
       "-First, write single concise paragraph (2-4 sentences) that captures the thread purpose, key decisions, context, and blockers or next steps. No heading, no list, no intro text.",
       "-Then add a blank line followed by axactly 2-3 bullet points (using '-') with the most important takeaways. Each bullet is one sentence.",
       "Style: neutral, specific, and concise. Preserve terminology from the thread (names, acronyms). Avoid filler or meta-commentary. Do not add a closing sentence.",
@@ -119,6 +122,52 @@ export const generateThreadSummary = base
       system,
       messages: [{ role: "user", content: compiled }],
       temperature: 0.2,
+    });
+
+    return streamToEventIterator(result.toUIMessageStream());
+  });
+
+export const generateCompose = base
+  .use(requiredAuthMiddleware)
+  .use(requiredWorkspaceMiddleware)
+  .use(aiSecurityMiddleware)
+  .route({
+    method: "POST",
+    path: "/ai/compose/generate",
+    summary: "Compose message",
+    tags: ["AI"],
+  })
+  .input(
+    z.object({
+      content: z.string(),
+    })
+  )
+  .handler(async ({ input }) => {
+    const markdown = await tipTapJsonToMarkdown(input.content);
+
+    const system = [
+      "You are an expert rewriting assistant. You are not a chatbot.",
+      "Task: Rewrite the provided contentent to be clearer and better structured while preserving meaning, facts, terminology, and names.",
+      "Do not address the user, ask questions, add greetings, or include commentary.",
+      "Keep existing links/mensions intact. Do not change code blocks or inline code content.",
+      "Output strictly in Markdow (paragraphs and optional bullet list). Do not output any HTML or images.",
+      "Return ONLY the rewritten content. No preamble, headings, or closing remarks.",
+    ].join("\n");
+
+    const result = streamText({
+      model: model,
+      system,
+      messages: [
+        {
+          role: "user",
+          content: "Please rewrite and improve the following content:",
+        },
+        {
+          role: "user",
+          content: markdown,
+        },
+      ],
+      temperature: 0,
     });
 
     return streamToEventIterator(result.toUIMessageStream());

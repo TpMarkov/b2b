@@ -10,6 +10,7 @@ import { useChat } from "@ai-sdk/react";
 import { eventIteratorToStream } from "@orpc/client";
 import { client } from "@/lib/orpc";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Response } from "@/components/ai-elements/response";
 
 interface SummarizeThreadProps {
   messageId: string;
@@ -133,9 +134,12 @@ const SummarizeThread = ({ messageId }: SummarizeThreadProps) => {
               </Button>
             </div>
           ) : summaryText ? (
-            <p className="whitespace-pre-wrap leading-relaxed text-white/95">
+            <Response
+              parseIncompleteMarkdown={status !== "ready"}
+              className="whitespace-pre-wrap leading-relaxed text-white/95"
+            >
               {summaryText}
-            </p>
+            </Response>
           ) : status === "submitted" || status === "streaming" ? (
             <div className="space-y-2">
               <Skeleton className="h-4 w-3/4" />

@@ -18,8 +18,9 @@ import {
 } from "lucide-react";
 import { Editor, useEditorState } from "@tiptap/react";
 import { cn } from "@/lib/utils";
-import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { Button } from "../ui/button";
+import ComposeAssistant from "./ComposeAssistant";
+import { markdownToJson } from "@/lib/helpers/markdown-to-json";
 
 interface MenubarProps {
   editor: Editor | null;
@@ -42,9 +43,19 @@ const Menubar = ({ editor }: MenubarProps) => {
         isOrderedList: editor.isActive("orderedList"),
         canUndo: editor.can().undo(),
         canRedo: editor.can().redo(),
+        currentContent: editor.getJSON(),
       };
     },
   });
+
+  const handleAcceptCompose = (markdown: string) => {
+    try {
+      const json = markdownToJson(markdown);
+      editor?.commands.setContent(json);
+    } catch {
+      console.log("Something went wrong with converting markdown to JSON.");
+    }
+  };
   if (!editor) {
     return null;
   }
@@ -192,6 +203,13 @@ const Menubar = ({ editor }: MenubarProps) => {
               </Button>
             </TooltipTrigger>
             <TooltipContent>Redo</TooltipContent>
+            <div className="w-px h-6 bg-border mx-2"></div>
+            <div className="flex flex-wrap gap-1">
+              <ComposeAssistant
+                onAccept={handleAcceptCompose}
+                content={JSON.stringify(editorState?.currentContent)}
+              />
+            </div>
           </Tooltip>
         </div>
       </TooltipProvider>
