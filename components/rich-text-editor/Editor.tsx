@@ -40,7 +40,7 @@ const RichTextEditor = ({ field, sendButton, footerLeft }: iAppProps) => {
       <EditorContent
         editor={editor}
         // change this to add more width to sending message input field
-        className="max-w-[200px] overflow-y-auto"
+        className="max-w-[600px] overflow-y-auto"
       />
       <div className="flex items-center gap-2 justify-between px-3 py-2 border-t border-input bg-card">
         <div className="min-h-8 flex items-center">{footerLeft}</div>

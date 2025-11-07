@@ -18,7 +18,6 @@ export const inviteMember = base
   .use(requiredAuthMiddleware)
   .use(requiredWorkspaceMiddleware)
   .use(standartWriteSecurityMiddleware)
-  .use(heavyWriteSecurityMiddleware)
   .route({
     method: "POST",
     path: "/workspace/members/invite",
